@@ -1,0 +1,49 @@
+//Procedure qui effectue la permutation des elements adjacents d'un tableau
+PROCEDURE swap_left(indice : INTEGER, VAR arr : ARRAY_OF INTEGER)
+VAR
+   tmp : INTEGER;
+BEGIN
+    IF (indice = 0) THEN
+        Write "Vous etes a l'extremite du tableau .";
+    ELSE
+           tmp := arr[indice];
+           arr[indice] := arr[indice-1];
+           arr[indice-1] := tmp;
+    END_IF 
+END
+
+
+//Algorithme du tri par insertion
+ALGORITHM Tri_Par_Insertion
+VAR
+    tab : ARRAY_OF INTEGER[6] :={7,9,5,4,2,1};
+    i,j : INTEGER;
+BEGIN
+    
+    //On initialise i a 1 pour etre sur qu'il y ait au moins un element(le precedent) avec qui le comparer
+    i = 1;
+
+
+    WHILE (i< tab.length) DO
+    
+       //j est le compteur inverse en charge des comparaisons
+        FOR j FROM i-1 TO 0 STEP -1  DO
+
+          // si i=0 cela veut dire que nous sommes en debut de tableau
+          IF (i = 0) THEN
+            BREAK;
+          END_IF
+
+          //si l'element a gauche est superieur, on interchange et i recule pour que j puisse recommencer la
+          // comparaison derriere lui
+         IF (tab[j] > tab[i]) THEN
+                swap_left(i,tab);
+                i := i-1;
+            END_IF
+        END_FOR
+        //Si il n'y a aucune permutation a faire,l'indice s'incremente
+        i := i+1;
+    END_WHILE
+        
+    
+END
